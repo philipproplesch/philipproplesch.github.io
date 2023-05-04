@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon";
+
+const links = [
+    {
+        name: "Linkedin",
+        icon: "mdi:linkedin",
+        url: "https://www.linkedin.com/in/philipproplesch/",
+    },
+    {
+        name: "Github",
+        icon: "mdi:github",
+        url: "https://github.com/philipproplesch",
+    },
+    {
+        name: "Twitter",
+        icon: "mdi:twitter",
+        url: "https://twitter.com/philipproplesch",
+    },
+];
+---
+
+<div class="flex flex-col items-center justify-center pt-10 lg:flex-row">
+    <div class="rounded-full border-4 border-purple-400 shadow-2xl">
+        <img src="/me.jpg" class="h-48 rounded-full sm:h-56" alt="" />
+    </div>
+    <div class="pt-8 sm:pt-10 lg:pl-8 lg:pt-0">
+        <h1
+            class="text-center font-header text-4xl lowercase text-white sm:text-left sm:text-5xl md:text-6xl"
+        >
+            Philip Proplesch
+        </h1>
+        <div
+            class="flex flex-col justify-center pt-3 sm:flex-row sm:pt-5 lg:justify-start"
+        >
+            <div
+                class="flex items-center justify-center sm:justify-start sm:pt-0"
+            >
+                {
+                    links.map((link) => (
+                        <a
+                            href={link.url}
+                            class="text-white hover:text-green-300 mr-4"
+                            target="_blank"
+                        >
+                            <Icon name={link.icon} class="h-8 w-8" />
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</div>
