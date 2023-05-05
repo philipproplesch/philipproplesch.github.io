@@ -1,17 +1,21 @@
 ---
+import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-const { title, showNavigation } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
-    <body class="bg-gray-900">
-        <slot />
-        <Footer />
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="h-screen bg-gradient-to-b from-gray-800 to-black">
+    <div class="flex flex-col h-screen justify-between">
+      <Navigation />
+      <slot />
+      <Footer />
+    </div>
+  </body>
 </html>
