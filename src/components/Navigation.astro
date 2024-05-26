@@ -1,19 +1,22 @@
 ---
-// <div>
-//   <nav aria-label="Site Nav">
-//     <ul class="flex items-center gap-6 text-sm">
-//       <li>
-//         <a
-//           class="text-gray-500 transition hover:text-gray-500"
-//           href="/"
-//         >
-//           About
-//         </a>
-//       </li>
-//     </ul>
-//   </nav>
-// </div>
+import "@fontsource-variable/fira-code";
 ---
+
+<style>
+  .blinking-cursor {
+    animation: blink 1s steps(1) infinite;
+  }
+
+  .code {
+    font-family: 'Fira Code', monospace;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+</style>
 
 <header aria-label="Site Header">
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
@@ -21,7 +24,7 @@
       <div class="md:flex md:items-center md:gap-12">
         <a class="block text-purple-400" href="/">
           <span class="sr-only">Home</span>
-          philip proplesch
+          <span class="code">/home/philip<span class="blinking-cursor">|</span></span>
         </a>
       </div>
     </div>
