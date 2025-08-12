@@ -1,5 +1,6 @@
 ---
 import "@fontsource-variable/fira-code";
+import { Icon } from "astro-icon/components";
 ---
 
 <style>
@@ -22,11 +23,55 @@ import "@fontsource-variable/fira-code";
   <div class="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
     <div class="flex h-16 items-center justify-between">
       <div class="md:flex md:items-center md:gap-12">
-        <a class="block text-purple-400" href="/">
+        <a class="block text-gray-800 dark:text-purple-400" href="/">
           <span class="sr-only">Home</span>
           <span class="code">/home/philip<span class="blinking-cursor">|</span></span>
         </a>
       </div>
+      <div class="flex items-center gap-3">
+        <button id="theme-toggle" aria-label="Toggle theme" class="inline-flex items-center justify-center h-9 w-9 rounded-md border border-transparent hover:border-purple-400">
+          <Icon name="lucide:sun-moon" class="h-5 w-5 text-gray-700 dark:text-gray-200" />
+        </button>
+      </div>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  const button = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+
+  function setTheme(mode) {
+    if (mode === 'dark') {
+      root.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else if (mode === 'light') {
+      root.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      localStorage.removeItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      root.classList.toggle('dark', prefersDark);
+    }
+  }
+
+  function toggleTheme() {
+    const isDark = root.classList.contains('dark');
+    setTheme(isDark ? 'light' : 'dark');
+  }
+
+  // No need to update labels; using CSS to swap icons
+
+  // Listen for system changes when user hasn't locked a preference
+  const media = window.matchMedia('(prefers-color-scheme: dark)');
+  function handleSystemChange() {
+    if (!localStorage.getItem('theme')) {
+      root.classList.toggle('dark', media.matches);
+    }
+  }
+  media.addEventListener?.('change', handleSystemChange);
+
+  button?.addEventListener('click', () => {
+    toggleTheme();
+  });
+</script>

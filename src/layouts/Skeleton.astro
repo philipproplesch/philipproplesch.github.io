@@ -11,9 +11,28 @@ import "../styles/global.css";
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="light dark" />
+    <script is:inline>
+      // Prevent FOUC: set initial theme before CSS renders
+      (function () {
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const shouldUseDark = stored ? stored === 'dark' : prefersDark;
+          const root = document.documentElement;
+          if (shouldUseDark) {
+            root.classList.add('dark');
+          } else {
+            root.classList.remove('dark');
+          }
+        } catch (_) {
+          // no-op
+        }
+      })();
+    </script>
     <title>{title}</title>
   </head>
-  <body class="h-screen bg-gradient-to-b from-gray-800 to-black">
+  <body class="h-screen text-gray-900 dark:text-gray-100 bg-gradient-to-b from-purple-400 to-white dark:from-gray-800 dark:to-black">
     <div class="flex flex-col h-screen justify-between">
       <Navigation />
       <slot />
